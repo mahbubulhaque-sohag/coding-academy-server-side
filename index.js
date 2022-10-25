@@ -5,14 +5,21 @@ app.use(cors());
 
 const Port = process.env.Port || 5000
 
-const couseData  = require('./data/courses.json');
+const courseDatas  = require('./data/courses.json');
 
 app.get('/', (req, res) => {
     res.send('coding academy api running')
 })
 
 app.get('/courses', (req,res)=> {
-    res.send(couseData)
+    res.send(courseDatas)
+})
+
+app.get('/courses/:id', (req, res)=>{
+    const id = req.params.id;
+    const singleCourse = courseDatas.find(courseData => courseData.id == id);
+    res.send(singleCourse)
+
 })
 
 app.listen(Port, () =>{
